@@ -1,0 +1,37 @@
+{
+  "name": "netpair",
+  "version": "0.1.0",
+  "description": "Pair programming in the browser over the net",
+  "main": "main.js",
+  "scripts": {
+    "start": "node server.js",
+    "open": "open http://localhost:3000",
+    "build": "webpack --watch --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thornecc/netpair.git"
+  },
+  "keywords": [
+    "programming",
+    "pair",
+    "collaboration",
+    "webrtc"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thornecc/netpair/issues"
+  },
+  "homepage": "https://github.com/thornecc/netpair#readme",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "webpack": "^3.6.0"
+  }
+}
