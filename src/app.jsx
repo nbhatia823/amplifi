@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import AceEditor from 'react-ace';
 
 class App extends Component {
   constructor() {
@@ -12,6 +13,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <AceEditor />
       </div>
     );
   }
