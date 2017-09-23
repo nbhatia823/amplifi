@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Particles from 'react-particles-js';
+import Sonic from 'sonicnet';
 
 class App extends Component {
   constructor() {
@@ -10,7 +11,7 @@ class App extends Component {
       listening: false,
       sending: false,
     };
-    this.receiver = new SonicReceiver();
+    this.receiver = new Sonic.Receiver();
     this.handleListeningClick = this.handleListeningClick.bind(this);
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleSendClick = this.handleSendClick.bind(this);
