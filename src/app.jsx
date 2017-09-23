@@ -28,7 +28,7 @@ class App extends Component {
     })
     this.receiver.on('message', x => {
       console.log(`Received ${x} `);
-      //window.open(x, "_blank");
+      window.open(x, "_blank");
     });
     this.receiver.start();
   }
