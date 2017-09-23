@@ -1,28 +1,25 @@
-/* /* /* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+/********************************
+
+    FONTS
+
+*********************************/
 
 @font-face {
-    font-family:"Nexa Bold";
-    src: url('../assets/fonts/nexa_bold.otf') format("opentype");
+    font-family: 'Nexa Bold';
+    src: url('../assets/fonts/nexa_bold.otf') format('opentype');
+
     font-family:"Nexa Light";
-    src: url('../assets/fonts/nexa_light.otf') format("opentype");
-  }
+    src: url('../assets/fonts/nexa_light.otf') format('opentype');
 
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url('../assets/fonts/material_icons.woff') format('woff');
+    font-family: 'Material Icons';
+    src: url('../assets/fonts/material_icons.woff') format('woff');
 }
 
-* {
-       -moz-user-select: none;
-        -ms-user-select: none;
-    -webkit-user-select: none;
-  -webkit-touch-callout: none;
-}
+/********************************
+
+    CSS RESET
+
+*********************************/
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -69,6 +66,12 @@ table {
 	border-spacing: 0;
 }
 
+/********************************
+
+    LAYOUT
+
+*********************************/
+
 #main {
     display: flex;
     flex-direction: column;
@@ -77,6 +80,24 @@ table {
 
     animation: fadeIn 1.5s ease-in;
 }
+
+#separator {
+  height: 1px;
+  width: 55%;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin: auto;
+  border-radius: 2px;
+}
+
+.hidden {
+  display: none;
+}
+
+/********************************
+
+    BACKGROUND
+
+*********************************/
 
 #background {
     z-index: -200;
@@ -94,6 +115,12 @@ table {
     top: 0;
     background-image: linear-gradient(to top, rgba(0, 198, 251, 1), rgba(0, 91, 234, 0.15));
 }
+
+/********************************
+
+    CONTENT
+
+*********************************/
 
 #content {
   display: flex;
@@ -116,28 +143,11 @@ p, input, button {
   font: 30px "Nexa Light", sans-serif;
 }
 
-.hidden {
-  display: none;
-}
+/********************************
 
-@keyframes blink {
-  0%   { opacity: 1; }
-  50%  { opacity: 0.45; }
-  100% { opacity: 1; }
-}
+    LISTEN STYLING
 
-@keyframes fadeIn {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-#separator {
-  height: 1px;
-  width: 55%;
-  background-color: rgba(255, 255, 255, 0.8);
-  margin: auto;
-  border-radius: 2px;
-}
+*********************************/
 
 #listenSection {
   border: solid 2px rgba(255, 255, 255, 0.75);
@@ -179,10 +189,11 @@ p, input, button {
     color: #007bef;
 }
 
-#dot {
-  /*font-size: 1.5em;*/
-  letter-spacing: 2em;
-}
+/********************************
+
+    SEND BUTTON STYLING
+
+*********************************/
 
 #sendButton {
   border-width: 0;
@@ -210,4 +221,34 @@ p, input, button {
 
 #sendSection:hover {
     border: double 3px rgba(255, 255, 255, 0.5);
+}
+
+/********************************
+
+    ANIMATIONS
+
+*********************************/
+
+@keyframes blink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.45; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/********************************
+
+    SELECTION STYLING
+
+*********************************/
+
+* {
+       -moz-user-select: none;
+        -ms-user-select: none;
+    -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
