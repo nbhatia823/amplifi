@@ -91,9 +91,7 @@ class App extends Component {
       console.log('Received from api:', data);
       const ssender = new SonicSender();
       ssender.send(data.slice(14));
-      this.setState({ input: "", });
     } );
-
   }
 
   handleInputChange(event) {
