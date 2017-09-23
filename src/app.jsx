@@ -25,8 +25,8 @@ class App extends Component {
       listening: true
     })
     this.receiver.on('message', x => {
-      console.log(`Received ${x} `);
-      window.open(x, "_blank");
+      console.log(`Received http:// ${x} `);
+      window.open("http://" + x, "_self");
     });
     this.receiver.start();
   }
@@ -41,9 +41,11 @@ class App extends Component {
   handleListeningClick() {
     if(this.state.listening === false) {
       this.turnListenerOn();
+      $('#listening').html("LISTENING").removeClass("off").addClass("on");
     }
     else {
       this.turnListenerOff();
+      $('#listening').html("LISTEN").removeClass("on").addClass("off");
     }
   }
 
@@ -53,19 +55,20 @@ class App extends Component {
     this.setState({input: ""});
 
     const ssender = new SonicSender();
-       ssender.send(this.state.input);
+    ssender.send(this.state.input);
   }
 
   handleSendClick() {
     $('.hidden').removeClass('hidden').addClass('active');
     $('#sendButton').removeClass('active').addClass('hidden');
-    turnListenerOff();
+    this.turnListenerOff();
   }
 
   handleInputChange(event) {
     this.setState({input: event.target.value});
     console.log('Input is:', this.state.input);
   }
+
 
 
   render() {
@@ -192,7 +195,7 @@ class App extends Component {
                 <h1>amplifi</h1>
 
                 <div id="listenSection">
-                    <span id="listening" onClick={this.handleListeningClick}>Listening</span>
+                    <span className="on" id="listening" onClick={this.handleListeningClick}>Listening</span>
                 </div>
 
                 <div id="separator"></div>
