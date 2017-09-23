@@ -59,6 +59,7 @@ class App extends Component {
   handleSendClick() {
     $('.hidden').removeClass('hidden').addClass('active');
     $('#sendButton').removeClass('active').addClass('hidden');
+    turnListenerOff();
   }
 
   handleInputChange(event) {
