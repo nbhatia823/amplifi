@@ -11,12 +11,15 @@ class App extends Component {
       input:"",
       listening: false,
     };
-    this.reciever = new SonicReceiver();
-    handleListeningClick();
+    this.receiver = new SonicReceiver();
     this.handleListeningClick = this.handleListeningClick.bind(this);
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleSendClick = this.handleSendClick.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.turnListenerOn();
   }
 
   turnListenerOn() {
@@ -48,13 +51,14 @@ class App extends Component {
 
   handleSubmitClick() {
     console.log('Submit; functionality to be implemented');
-  }
-
-  handleSendClick() {
     console.log('Sending message ', this.state.input );
 
     const ssender = new SonicSender();
        ssender.send(this.state.input);
+  }
+
+  handleSendClick() {
+
   }
 
   handleInputChange(event) {
