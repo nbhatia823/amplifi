@@ -81,15 +81,26 @@ table {
 }
 
 #separator {
-  height: 1px;
+  height: 0.5px;
   width: 55%;
   background-color: rgba(255, 255, 255, 0.8);
   margin: auto;
   border-radius: 2px;
+  flex-grow: 1;
 }
 
-.hidden {
-  display: none;
+.hidden, .wave-hidden {
+  display: none !important;
+}
+
+.wave-active {
+    display: inherit;
+}
+
+.transparent {
+    opacity: 0;
+    pointer-events: none;
+    cursor: default;
 }
 
 /********************************
@@ -136,6 +147,8 @@ h1 {
   color: white;
   margin: auto;
   display: block;
+
+  flex-grow: 5;
 }
 
 p, input, button {
@@ -150,15 +163,18 @@ p, input, button {
 
 #listenSection {
   border: solid 2px rgba(255, 255, 255, 0.75);
-  padding: 1.2em 0.8em 1em 1.5em;
+  padding: 1.4em 0.85em 0.55em 1.5em;
   margin: 3em auto;
   border-radius: 5px;
-  width: 25%;
   display: flex;
   justify-content: center;
   background-color: rgba(0, 40, 255, 0.15);
+  height: 1em;
+  width: 16.5em;
 
   transition: background-color 0.3s ease-out;
+
+  flex-grow: 3;
 }
 
 #listenSection:hover {
@@ -204,6 +220,7 @@ p, input, button {
 
 #sendButton {
   border-width: 0;
+  outline-width: 0;
   padding: 0;
   margin: 0;
   background-color: transparent;
@@ -219,11 +236,14 @@ p, input, button {
 
 #sendSection {
     border: double 3px rgba(255, 255, 255, 0);
-    padding: 1.2em 0.5em 1em 1.6em;
+    padding: 1em 0.4em 0.8em 1.6em;
     margin: 3em auto;
     border-radius: 5px;
     background-color: white;
     cursor: pointer;
+
+    height: 1.3em;
+    flex-grow: 3;
 }
 
 #sendSection:hover {
@@ -239,6 +259,22 @@ p, input, button {
 #urlInput {
     border-width: 0;
     outline-width: 0;
+    flex-grow: 4;
+
+    padding: 0;
+    margin: 0;
+
+    font-size: 1em;
+    color: #000;
+    letter-spacing: 0.3em;
+    font-family: 'Nexa Bold';
+    line-height: 1.2em;
+    /*text-transform: uppercase;*/
+}
+
+.inputReceive {
+    width: 40%;
+    transition: width 3s ease-in;
 }
 
 #sendSection {
@@ -247,8 +283,17 @@ p, input, button {
 }
 
 #sendSection .material-icons {
-  font-size: 2.5em;
+  font-size: 1.5em;
   color: #0097f4;
+  flex-grow: 1;
+}
+
+#cancel {
+    font-size: 2.5em;
+    color: #fff;
+    cursor: pointer;
+
+    flex-grow: 1;
 }
 
 /********************************
@@ -280,3 +325,5 @@ p, input, button {
     -webkit-user-select: none;
   -webkit-touch-callout: none;
 }
+
+::-webkit-input-placeholder { line-height: normal; }

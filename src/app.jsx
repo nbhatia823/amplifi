@@ -24,6 +24,9 @@ class App extends Component {
         this.exitSendMode();
       }
     });
+    $('#cancel').click((e) => {
+        (!$(this).hasClass('transparent')) ? this.exitSendMode() : '' ;
+    });
   }
 
   turnListenerOn() {
@@ -56,17 +59,20 @@ class App extends Component {
   }
 
   handleSubmitClick() {
-    console.log('Submit; functionality to be implemented');
-    console.log('Sending message ', this.state.input );
-    const ssender = new SonicSender();
-    $.get()
-    ssender.send(this.state.input);
-    this.setState({ input: "", });
-  }
+     console.log('Sending message ', this.state.input );
+     $.get('/url', { url: this.state.input }, data => {
+       console.log('Received from api:', data);
+       const ssender = new SonicSender();
+       ssender.send(data.slice(14));
+       this.setState({ input: "", });
+     } );
+   }
 
   handleSendClick() {
     $('.hidden').removeClass('hidden').addClass('active');
     $('#sendButton').removeClass('active').addClass('hidden');
+    $('#cancel').removeClass('transparent');
+    $('.inputHidden').removeClass('inputHidden').addClass('inputReceive');
     this.turnListenerOff();
     this.setState({ sending: true, });
   }
@@ -74,11 +80,13 @@ class App extends Component {
   exitSendMode() {
     $('.active').removeClass('active').addClass('hidden');
     $('#sendButton').removeClass('hidden').addClass('active');
+    $('#cancel').addClass('transparent');
+    $('#sendSection').removeClass('hidden');
+    $('.inputReceive').removeClass('inputReceive').addClass('inputHidden');
     this.setState({
       input: '',
       sending: false,
     });
-
   }
 
   handleInputChange(event) {
@@ -215,7 +223,7 @@ class App extends Component {
 
                 <div id="separator"></div>
 
-                <div id="sendSection" onClick={this.handleSendClick}>
+                <div className="inputHidden" id="sendSection" onClick={this.handleSendClick}>
                     <button className="active" id="sendButton">Send</button>
                     <input className="hidden"
                            id="urlInput"
@@ -223,10 +231,13 @@ class App extends Component {
                            value={this.state.input}
                            onChange={this.handleInputChange}
                            placeholder="Enter your link"/>
-                    <span className="hidden" id="submit" onClick={this.handleSubmitClick}>
+                    <span className="hidden" id="submit" type="submit" onClick={this.handleSubmitClick}>
                       <i className="material-icons">keyboard_arrow_right</i>
                     </span>
                 </div>
+
+                <i className="material-icons transparent" id="cancel">cancel</i>
+
             </div>
         </div>
     );
