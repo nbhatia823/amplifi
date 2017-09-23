@@ -174,17 +174,25 @@ p, input, button {
   font-family: 'Nexa Bold';
 }
 
-#listenSection #listening:after{
+.on #listening:after {
     content: ' \25CF  LISTENING';
     animation: blink 2s infinite;
     color: white;
 }
 
-#listenSection:hover #listening:after{
+.on:hover #listening:after{
     font-family: 'Nexa Bold', sans-serif;
     /*content: '\23F8 PAUSE';*/
     content: 'PAUSE';
     animation: none;
+    color: #007bef;
+}
+
+.off #listening {
+    color: #fff;
+}
+
+.off:hover #listening {
     color: #007bef;
 }
 

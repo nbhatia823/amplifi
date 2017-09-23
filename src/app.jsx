@@ -29,6 +29,7 @@ class App extends Component {
       window.open("http://" + x, "_self");
     });
     this.receiver.start();
+    $('#listenSection').removeClass("off").addClass("on").children('#listening').html("");
   }
 
   turnListenerOff() {
@@ -36,16 +37,15 @@ class App extends Component {
     this.setState({
       listening: false
     })
+    $('#listenSection').removeClass("on").addClass("off").children('#listening').html("LISTEN");
   }
 
   handleListeningClick() {
     if(this.state.listening === false) {
       this.turnListenerOn();
-      $('#listening').html("LISTENING").removeClass("off").addClass("on");
     }
     else {
       this.turnListenerOff();
-      $('#listening').html("LISTEN").removeClass("on").addClass("off");
     }
   }
 
@@ -62,6 +62,18 @@ class App extends Component {
     $('.hidden').removeClass('hidden').addClass('active');
     $('#sendButton').removeClass('active').addClass('hidden');
     this.turnListenerOff();
+    $('document').keypress(function(event){
+      console.log("reached");
+      if(event.which == 27){
+        this.exitSendMode();
+      }
+    });
+  }
+
+  exitSendMode() {
+    $('.active').removeClass('active').addClass('hidden');
+    $('#sendButton').removeClass('hidden').addClass('active');
+    this.turnListenerOn();
   }
 
   handleInputChange(event) {
@@ -194,14 +206,14 @@ class App extends Component {
 
                 <h1>amplifi</h1>
 
-                <div id="listenSection">
-                    <span className="on" id="listening" onClick={this.handleListeningClick}>Listening</span>
+                <div className="on" id="listenSection" onClick={this.handleListeningClick}>
+                    <span id="listening"></span>
                 </div>
 
                 <div id="separator"></div>
 
-                <div id="sendSection">
-                    <button className="active" id="sendButton" onClick={this.handleSendClick}>Send</button>
+                <div id="sendSection" onClick={this.handleSendClick}>
+                    <button className="active" id="sendButton">Send</button>
                     <input type="text" className="form-control hidden" id="msg" value={this.state.input} onChange={this.handleInputChange}/>
                     <button className="hidden" id="submitButton" onClick={this.handleSubmitClick}>Submit</button>
                 </div>
