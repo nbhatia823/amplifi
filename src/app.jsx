@@ -52,7 +52,8 @@ class App extends Component {
   handleSubmitClick() {
     console.log('Submit; functionality to be implemented');
     console.log('Sending message ', this.state.input );
-
+    this.setState({input: ""});
+  
     const ssender = new SonicSender();
        ssender.send(this.state.input);
   }
@@ -79,8 +80,7 @@ class App extends Component {
         <div id="sendSection">
           <Button id="sendButton" text="Send" callback={this.handleSendClick}/>
           <div className="form-group">
-            <label>Message:</label>
-            <input type="text" className="form-control" id="msg" onChange={this.handleInputChange}/>
+            <input type="text" className="form-control" id="msg" value={this.state.input} onChange={this.handleInputChange}/>
           </div>
           <Button id="submitButton" text="Submit" callback={this.handleSubmitClick}/>
         </div>
