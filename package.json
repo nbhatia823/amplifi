@@ -31,7 +31,6 @@
     "babel-preset-react": "^6.24.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-particles": "0.0.3",
     "react-particles-js": "^1.5.0",
     "webpack": "^3.6.0"
   }
