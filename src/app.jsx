@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Particles from 'react-particles-js';
-import Input from './input.jsx';
-import Button from './button.jsx';
 
 class App extends Component {
   constructor() {
@@ -34,7 +32,7 @@ class App extends Component {
   }
 
   turnListenerOff() {
-    this.reciever.stop();
+    this.receiver.stop();
     this.setState({
       listening: false
     })
@@ -59,7 +57,8 @@ class App extends Component {
   }
 
   handleSendClick() {
-
+    $('.hidden').removeClass('hidden').addClass('active');
+    $('#sendButton').removeClass('active').addClass('hidden');
   }
 
   handleInputChange(event) {
@@ -192,15 +191,15 @@ class App extends Component {
                 <h1>amplifi</h1>
 
                 <div id="listenSection">
-                    <Button id="listening" text="Listening" callback={this.handleListeningClick}/>
+                    <span id="listening" onClick={this.handleListeningClick}>Listening</span>
                 </div>
 
                 <div id="separator"></div>
 
                 <div id="sendSection">
-                    <Button className="active" id="sendButton" text="Send" callback={this.handleSendClick}/>
+                    <button className="active" id="sendButton" onClick={this.handleSendClick}>Send</button>
                     <input type="text" className="form-control hidden" id="msg" value={this.state.input} onChange={this.handleInputChange}/>
-                    <Button className="hidden" id="submitButton" text="Submit" callback={this.handleSubmitClick}/>
+                    <button className="hidden" id="submitButton" onClick={this.handleSubmitClick}>Submit</button>
                 </div>
             </div>
         </div>
