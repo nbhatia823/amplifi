@@ -6,10 +6,12 @@
 
 @font-face {
     font-family: 'Nexa Bold';
-    src: url('./assets/fonts/nexa_bold.woff') format('woff');
+    src: url('./assets/fonts/nexa_bold.otf');
+}
 
+@font-face {
     font-family: 'Nexa Light';
-    src: url('./assets/fonts/nexa_light.woff') format('woff');
+    src: url('./assets/fonts/nexa_light.otf');
 }
 
 /********************************
@@ -130,7 +132,7 @@ table {
 }
 
 h1 {
-  font: 8em "Nexa Bold", sans-serif;
+  font: 8em 'Nexa Bold';
   color: white;
   margin: auto;
   display: block;
