@@ -78,7 +78,7 @@ class App extends Component {
         </div>
         <div id="separator"></div>
         <div id="sendSection">
-           <Button id="sendButton" text="Send" callback={this.handleSendClick}/>
+          <Button id="sendButton" text="Send" callback={this.handleSendClick}/>
           <div className="form-group">
             <input type="text" className="form-control" id="msg" value={this.state.input} onChange={this.handleInputChange}/>
           </div>
