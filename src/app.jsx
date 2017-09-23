@@ -26,6 +26,9 @@ class App extends Component {
         this.exitSendMode();
       }
     });
+    $('#cancel').click((e) => {
+        (!$(this).hasClass('transparent')) ? this.exitSendMode() : '' ;
+    });
   }
 
   turnListenerOn() {
@@ -64,13 +67,18 @@ class App extends Component {
   handleSendClick() {
     $('.hidden').removeClass('hidden').addClass('active');
     $('#sendButton').removeClass('active').addClass('hidden');
-    //this.turnListenerOff();
+    $('#cancel').removeClass('transparent');
+    $('.inputHidden').removeClass('inputHidden').addClass('inputReceive');
+    this.turnListenerOff();
     this.setState({ sending: true, });
   }
 
   exitSendMode() {
     $('.active').removeClass('active').addClass('hidden');
     $('#sendButton').removeClass('hidden').addClass('active');
+    $('#cancel').addClass('transparent');
+    $('#sendSection').removeClass('hidden');
+    $('.inputReceive').removeClass('inputReceive').addClass('inputHidden');
     this.setState({
       input: '',
       sending: false,
@@ -222,7 +230,7 @@ class App extends Component {
 
                 <div id="separator"></div>
 
-                <div id="sendSection" onClick={this.handleSendClick}>
+                <div className="inputHidden" id="sendSection" onClick={this.handleSendClick}>
                     <button className="active" id="sendButton">Send</button>
                     <input className="hidden"
                            id="urlInput"
@@ -230,10 +238,13 @@ class App extends Component {
                            value={this.state.input}
                            onChange={this.handleInputChange}
                            placeholder="Enter your link"/>
-                    <span className="hidden" id="submit" onClick={this.handleSubmitClick}>
+                    <span className="hidden" id="submit" type="submit" onClick={this.handleSubmitClick}>
                       <i className="material-icons">keyboard_arrow_right</i>
                     </span>
                 </div>
+
+                <i className="material-icons transparent" id="cancel">cancel</i>
+
             </div>
         </div>
     );
