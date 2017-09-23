@@ -1,34 +1,34 @@
 {
-  "name": "netpair",
+  "name": "amplifi",
   "version": "0.1.0",
-  "description": "Pair programming in the browser over the net",
-  "main": "main.js",
+  "description": "Zero config link and file sharing over soundwaves",
+  "main": "server.js",
   "scripts": {
-    "start": "open ./public/index.html",
-    "build": "webpack --watch --config webpack.config.js"
+    "build": "webpack --watch --config webpack.config.js",
+    "postinstall": "webpack --config webpack.config.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thornecc/netpair.git"
+    "url": "git+https://github.com/nbhatia823/amplifi.git"
   },
   "keywords": [
-    "programming",
-    "pair",
-    "collaboration",
-    "webrtc"
+    "share",
+    "WebAudio",
+    "WebRTC"
   ],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thornecc/netpair/issues"
+    "url": "https://github.com/nbhatia823/amplifi/issues"
   },
-  "homepage": "https://github.com/thornecc/netpair#readme",
+  "homepage": "https://github.com/nbhatia823/amplifi#readme",
   "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-react": "^6.24.1",
-    "body-parser": "^1.18.1",
-    "express": "^4.15.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "request-promise": "^4.2.2",
