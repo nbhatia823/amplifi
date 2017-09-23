@@ -18,6 +18,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    navigator.getUserMedia({audio: true}, () => console.log("reached"), () => {} );
     this.turnListenerOn();
     $(document).keydown((e) => {
       if(e.keyCode == 27 || e.which == 27) {
