@@ -2,11 +2,11 @@
   "name": "amplifi",
   "version": "0.1.0",
   "description": "Zero config link and file sharing over soundwaves",
-  "main": "",
+  "main": "server.js",
   "scripts": {
-    "build":  "webpack --watch --config webpack.config.js",
-    "server": "node server.js",
-    "start": "open ./public/index.html"
+    "build": "webpack --watch --config webpack.config.js",
+    "postinstall": "webpack --config webpack.config.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -24,13 +24,15 @@
   },
   "homepage": "https://github.com/nbhatia823/amplifi#readme",
   "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-react": "^6.24.1",
-    "body-parser": "^1.18.1",
-    "express": "^4.15.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-particles": "0.0.3",
+    "react-particles-js": "^1.5.0",
     "webpack": "^3.6.0"
   }
 }
