@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Particles from 'react-particles-js';
-//import Input from './input.jsx';
+import Input from './input.jsx';
 import Button from './button.jsx';
 
 class App extends Component {
@@ -10,7 +10,29 @@ class App extends Component {
     this.state = {
       input:""
     };
+    this.handleListening = this.handleListening.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSend = this.handleSend.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
+
+  handleListening() {
+    console.log('Listening; functionality to be implemented');
+  }
+
+  handleSubmit() {
+    console.log('Submit; functionality to be implemented');
+  }
+
+  handleSend() {
+    console.log('Send will disappear')
+  }
+
+  handleInputChange(event) {
+    this.setState({input: event.target.value});
+    console.log('Input is:', this.state.input);
+  }
+  
 
   render() {
     return (
@@ -130,13 +152,16 @@ class App extends Component {
         </div>
           <h1>amplifi</h1>
         <div id="listenSection">
-          <Button id="listening" text="Listening"/>
+          <Button id="listening" text="Listening" callback={this.handleListening}/>
         </div>
         <div id="separator"></div>
         <div id="sendSection">
-          <Button id="sendButton" text="Send"/>
-          <input className="send hidden"/>
-          <Button id="submitButton" text="Submit"/>
+          <Button id="sendButton" text="Send" callback={this.handleSend}/>
+          <div className="form-group">
+            <label>Message:</label>
+            <input type="text" className="form-control" id="msg" onChange={this.handleInputChange}/>
+          </div>
+          <Button id="submitButton" text="Submit" callback={this.handleSubmit}/>
         </div>
       </div>
     );
