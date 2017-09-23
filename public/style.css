@@ -6,13 +6,10 @@
 
 @font-face {
     font-family: 'Nexa Bold';
-    src: url('./assets/fonts/nexa_bold.otf') format('opentype');
+    src: url('./assets/fonts/nexa_bold.woff') format('woff');
 
     font-family: 'Nexa Light';
-    src: url('./assets/fonts/nexa_light.otf') format('opentype');
-
-    font-family: 'Material Icons';
-    src: url('./assets/fonts/material_icons.woff') format('woff');
+    src: url('./assets/fonts/nexa_light.woff') format('woff');
 }
 
 /********************************
