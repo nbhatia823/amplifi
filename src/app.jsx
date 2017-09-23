@@ -15,11 +15,12 @@ class App extends Component {
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleSendClick = this.handleSendClick.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.turnListenerOn = this.turnListenerOn.bind(this);
+    this.setupListenerForListening = this.setupListenerForListening.bind(this);
   }
 
   componentDidMount() {
-    navigator.getUserMedia({audio: true}, () => console.log("reached"), () => {} );
-    this.turnListenerOn();
+    this.receiver.start(this.setupListenerForListening);
     $(document).keydown((e) => {
       if(e.keyCode == 27 || e.which == 27) {
         this.exitSendMode();
@@ -28,16 +29,20 @@ class App extends Component {
   }
 
   turnListenerOn() {
+    //if(this.state.sending === true)
+      //this.exitSendMode();
+    this.setupListenerForListening();
+    this.receiver.start();
+  }
+
+  setupListenerForListening() {
     this.setState({
       listening: true,
     })
-    if(this.state.sending === true)
-      this.exitSendMode();
     this.receiver.on('message', x => {
-      console.log(`Received http:// ${x} `);
-      window.open("http://" + x, "_self");
+      console.log(`Received http:// ${x}`);
+      window.open("https://is.gd/" + x, "_self");
     });
-    this.receiver.start();
     $('#listenSection').removeClass("off").addClass("on").children('#listening').html("");
   }
 
@@ -56,19 +61,10 @@ class App extends Component {
       this.turnListenerOff();
   }
 
-  handleSubmitClick() {
-    console.log('Submit; functionality to be implemented');
-    console.log('Sending message ', this.state.input );
-    const ssender = new SonicSender();
-    $.get()
-    ssender.send(this.state.input);
-    this.setState({ input: "", });
-  }
-
   handleSendClick() {
     $('.hidden').removeClass('hidden').addClass('active');
     $('#sendButton').removeClass('active').addClass('hidden');
-    this.turnListenerOff();
+    //this.turnListenerOff();
     this.setState({ sending: true, });
   }
 
@@ -79,6 +75,16 @@ class App extends Component {
       input: '',
       sending: false,
     });
+  }
+
+  handleSubmitClick() {
+    console.log('Sending message ', this.state.input );
+    $.get('/url', {url: this.state.input}, data => {
+      console.log('Received from api:', data);
+      const ssender = new SonicSender();
+      ssender.send(data.slice(14));
+      this.setState({ input: "", });
+    } );
 
   }
 
@@ -210,8 +216,8 @@ class App extends Component {
 
                 <h1>amplifi</h1>
 
-                <div className="on" id="listenSection" onClick={this.handleListeningClick}>
-                    <span id="listening"></span>
+                <div className="off" id="listenSection" onClick={this.handleListeningClick}>
+                    <span id="listening">LISTEN</span>
                 </div>
 
                 <div id="separator"></div>

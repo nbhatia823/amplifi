@@ -1,5 +1,27 @@
-const ALPHABET = '\n abcdefghijklmnopqrstuvwxyz0123456789,.!?@*';
+const ALPHABET = '\n abcdefghijklmnopqrstuvwxyz0123456789,.!?@#*';
 const audioContext = new window.AudioContext || new webkitAudioContext();
+
+const removeDuplicates = (charArray, repeatChar) => {
+  for (let i=1; i<charArray.length; ++i) {
+    if (charArray[i-1] === charArray[i]) {
+      charArray[i] = repeatChar;
+    }
+  }
+  return charArray;
+};
+
+const restoreDuplicates = (charArray, repeatChar) => {
+  for (let i=1; i<charArray.length; ++i) {
+    if (charArray[i] === repeatChar) {
+      charArray[i] = charArray[i-1];
+    }
+  }
+  return charArray;
+};
+/*
+const removeCapitals = (charArray, capitalChar) => {
+  for (let i=0; i<charArray.length; ++i) {
+*/
 /** A ring buffer
  *  @Constructor
  */
@@ -250,7 +272,7 @@ const SonicReceiver = function(params) {
   this.iteration = 0;
 }
 
-var State = {
+const State = {
   IDLE: 1,
   RECV: 2
 };
@@ -258,13 +280,15 @@ var State = {
 /**
  * Start processing the audio stream.
  */
-SonicReceiver.prototype.start = function() {
+SonicReceiver.prototype.start = function(successCallback, failureCallback) {
   // Start listening for microphone. Continue init in onStream.
-  var constraints = {
+  const constraints = {
     audio: { optional: [{ echoCancellation: false }] }
   };
-  navigator.webkitGetUserMedia(constraints,
-      this.onStream_.bind(this), this.onStreamError_.bind(this));
+  navigator.mediaDevices.getUserDevice(constraints)
+    .then(this.onStream_.bind(this), this.onStreamError_.bind(this))
+    .then(() => successCallback && successCallback(),
+          () => rejectedCallback && rejectedCallback());
 };
 
 /**
