@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Particles from 'react-particles-js';
-import Input from './input.jsx';
+//import Input from './input.jsx';
 import Button from './button.jsx';
 
 class App extends Component {
   constructor() {
     super();
-
     this.state = {
       input:""
     };
@@ -17,7 +16,7 @@ class App extends Component {
     return (
       <div>
         <div id="background">
-        <Particles params={{
+        {/* <Particles params={{
           "particles": {
             "number": {
               "value": 135,
@@ -126,18 +125,18 @@ class App extends Component {
             }
           },
           "retina_detect": true
-        }}/>
+        }}/> */}
 
         </div>
-        <h1>amplifi</h1>
+          <h1>amplifi</h1>
         <div id="listenSection">
-          <p id="listening">LISTENING</p>
+          <Button id="listening" text="Listening"/>
         </div>
         <div id="separator"></div>
         <div id="sendSection">
-          <Button class="active" id="sendButton" text="Send"/>
-          <Input class="send hidden"/>
-          <Button class="send hidden" id="submitButton"/>
+          <Button id="sendButton" text="Send"/>
+          <input className="send hidden"/>
+          <Button id="submitButton" text="Submit"/>
         </div>
       </div>
     );
