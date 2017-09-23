@@ -18,6 +18,11 @@ class App extends Component {
 
   componentDidMount() {
     this.turnListenerOn();
+    $(document).keydown((e) => {
+      if(e.keyCode == 27 || e.which == 27) {
+        this.exitSendMode();
+      }
+    });
   }
 
   turnListenerOn() {
@@ -52,36 +57,29 @@ class App extends Component {
   handleSubmitClick() {
     console.log('Submit; functionality to be implemented');
     console.log('Sending message ', this.state.input );
-    this.setState({input: ""});
-
     const ssender = new SonicSender();
+    $.get()
     ssender.send(this.state.input);
+    this.setState({ input: "", });
   }
 
   handleSendClick() {
     $('.hidden').removeClass('hidden').addClass('active');
     $('#sendButton').removeClass('active').addClass('hidden');
     this.turnListenerOff();
-    $('document').keypress(function(event){
-      console.log("reached");
-      if(event.which == 27){
-        this.exitSendMode();
-      }
-    });
   }
 
   exitSendMode() {
     $('.active').removeClass('active').addClass('hidden');
     $('#sendButton').removeClass('hidden').addClass('active');
-    this.turnListenerOn();
+    this.setState({ input: '', });
+
   }
 
   handleInputChange(event) {
     this.setState({input: event.target.value});
     console.log('Input is:', this.state.input);
   }
-
-
 
   render() {
     return (
@@ -214,8 +212,15 @@ class App extends Component {
 
                 <div id="sendSection" onClick={this.handleSendClick}>
                     <button className="active" id="sendButton">Send</button>
-                    <input type="text" className="form-control hidden" id="msg" value={this.state.input} onChange={this.handleInputChange}/>
-                    <button className="hidden" id="submitButton" onClick={this.handleSubmitClick}>Submit</button>
+                    <input className="hidden"
+                           id="msg"
+                           type="text"
+                           value={this.state.input}
+                           onChange={this.handleInputChange}
+                           placeholder="Amplifi your link"/>
+                    <span className="hidden" id="submit" onClick={this.handleSubmitClick}>
+                      <i className="material-icons">send</i>
+                    </span>
                 </div>
             </div>
         </div>

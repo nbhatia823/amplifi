@@ -14,6 +14,8 @@
     src: url('./assets/fonts/nexa_light.otf');
 }
 
+.materials-icons { color: #0097f4 !important; }
+
 /********************************
 
     CSS RESET
