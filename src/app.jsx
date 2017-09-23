@@ -9,27 +9,45 @@ class App extends Component {
     this.state = {
       input:"",
       listening: false,
+      sending: false,
     };
     this.receiver = new Sonic.Receiver();
     this.handleListeningClick = this.handleListeningClick.bind(this);
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleSendClick = this.handleSendClick.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.turnListenerOn = this.turnListenerOn.bind(this);
+    this.setupListenerForListening = this.setupListenerForListening.bind(this);
   }
 
   componentDidMount() {
-    this.turnListenerOn();
+    this.receiver.start(this.setupListenerForListening);
+    $(document).keydown((e) => {
+      if(e.keyCode == 27 || e.which == 27) {
+        this.exitSendMode();
+      }
+    });
+    $('#cancel').click((e) => {
+        (!$(this).hasClass('transparent')) ? this.exitSendMode() : '' ;
+    });
   }
 
   turnListenerOn() {
+    //if(this.state.sending === true)
+      //this.exitSendMode();
+    this.setupListenerForListening();
+    this.receiver.start();
+  }
+
+  setupListenerForListening() {
     this.setState({
-      listening: true
+      listening: true,
     })
     this.receiver.on('message', x => {
-      console.log(`Received http:// ${x} `);
-      window.open("http://" + x, "_self");
+      console.log(`Received http:// ${x}`);
+      window.open("https://is.gd/" + x, "_self");
     });
-    this.receiver.start();
+    $('#listenSection').removeClass("off").addClass("on").children('#listening').html("");
   }
 
   turnListenerOff() {
@@ -37,40 +55,50 @@ class App extends Component {
     this.setState({
       listening: false
     })
+    $('#listenSection').removeClass("on").addClass("off").children('#listening').html("LISTEN");
   }
 
   handleListeningClick() {
-    if(this.state.listening === false) {
+    if(this.state.listening === false)
       this.turnListenerOn();
-      $('#listening').html("LISTENING").removeClass("off").addClass("on");
-    }
-    else {
+    else
       this.turnListenerOff();
-      $('#listening').html("LISTEN").removeClass("on").addClass("off");
-    }
-  }
-
-  handleSubmitClick() {
-    console.log('Submit; functionality to be implemented');
-    console.log('Sending message ', this.state.input );
-    this.setState({input: ""});
-
-    const ssender = new Sonic.Sender();
-       ssender.send(this.state.input);
   }
 
   handleSendClick() {
     $('.hidden').removeClass('hidden').addClass('active');
     $('#sendButton').removeClass('active').addClass('hidden');
+    $('#cancel').removeClass('transparent');
+    $('.inputHidden').removeClass('inputHidden').addClass('inputReceive');
     this.turnListenerOff();
+    this.setState({ sending: true, });
+  }
+
+  exitSendMode() {
+    $('.active').removeClass('active').addClass('hidden');
+    $('#sendButton').removeClass('hidden').addClass('active');
+    $('#cancel').addClass('transparent');
+    $('#sendSection').removeClass('hidden');
+    $('.inputReceive').removeClass('inputReceive').addClass('inputHidden');
+    this.setState({
+      input: '',
+      sending: false,
+    });
+  }
+
+  handleSubmitClick() {
+    console.log('Sending message ', this.state.input );
+    $.get('/url', {url: this.state.input}, data => {
+      console.log('Received from api:', data);
+      const ssender = new SonicSender();
+      ssender.send(data.slice(14));
+    } );
   }
 
   handleInputChange(event) {
     this.setState({input: event.target.value});
     console.log('Input is:', this.state.input);
   }
-
-
 
   render() {
     return (
@@ -195,17 +223,27 @@ class App extends Component {
 
                 <h1>amplifi</h1>
 
-                <div id="listenSection">
-                    <span className="on" id="listening" onClick={this.handleListeningClick}>Listening</span>
+                <div className="off" id="listenSection" onClick={this.handleListeningClick}>
+                    <span id="listening">LISTEN</span>
                 </div>
 
                 <div id="separator"></div>
 
-                <div id="sendSection">
-                    <button className="active" id="sendButton" onClick={this.handleSendClick}>Send</button>
-                    <input type="text" className="form-control hidden" id="msg" value={this.state.input} onChange={this.handleInputChange}/>
-                    <button className="hidden" id="submitButton" onClick={this.handleSubmitClick}>Submit</button>
+                <div className="inputHidden" id="sendSection" onClick={this.handleSendClick}>
+                    <button className="active" id="sendButton">Send</button>
+                    <input className="hidden"
+                           id="urlInput"
+                           type="text"
+                           value={this.state.input}
+                           onChange={this.handleInputChange}
+                           placeholder="Enter your link"/>
+                    <span className="hidden" id="submit" type="submit" onClick={this.handleSubmitClick}>
+                      <i className="material-icons">keyboard_arrow_right</i>
+                    </span>
                 </div>
+
+                <i className="material-icons transparent" id="cancel">cancel</i>
+
             </div>
         </div>
     );

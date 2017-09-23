@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 const logreq = (req, res, next) => {
   console.log(`
     Request method: ${req.method},
-    Request URL: ${req.url}
+    Request URL: ${req.url},
   `);
   next();
 };
