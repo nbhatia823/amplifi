@@ -36,4 +36,5 @@ const shorten = (req, res, next) => {
 app.get('/url', logreq, shorten);
 
 /******** RUN SERVER ********/
-app.listen(3000, () => console.log("Listening on port 3000."));
+const PORT = process.env.PORT;
+app.listen(PORT, () => console.log("Listening on port ", PORT));
