@@ -55,13 +55,8 @@ class App extends Component {
     console.log('Sending message ', this.state.input );
     this.setState({input: ""});
 
-<<<<<<< HEAD
-    const ssender = new SonicSender();
-    ssender.send(this.state.input);
-=======
     const ssender = new Sonic.Sender();
        ssender.send(this.state.input);
->>>>>>> ec0b09069fc775491b4253b05eb66705d93352e2
   }
 
   handleSendClick() {
