@@ -15,7 +15,9 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+
+        <div>
+
         <div id="background">
         <Particles params={{
           "particles": {
@@ -129,17 +131,30 @@ class App extends Component {
         }}/>
 
         </div>
-        <h1>amplifi</h1>
-        <div id="listenSection">
-          <p id="listening">LISTENING</p>
+
+        <div id="gradient"></div>
+
+        <div id="content">
+
+            <h1>amplifi</h1>
+
+            <div id="listenSection">
+
+                <span id="listening">
+                </span>
+
+            </div>
+
+            <div id="separator"></div>
+
+            <div id="sendSection">
+                <Button class="active" id="sendButton" text="Send"/>
+                <Input class="send hidden"/>
+                <Button class="send hidden" id="submitButton"/>
+            </div>
         </div>
-        <div id="separator"></div>
-        <div id="sendSection">
-          <Button class="active" id="sendButton" text="Send"/>
-          <Input class="send hidden"/>
-          <Button class="send hidden" id="submitButton"/>
+
         </div>
-      </div>
     );
   }
 }
