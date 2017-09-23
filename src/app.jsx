@@ -8,6 +8,7 @@ class App extends Component {
     this.state = {
       input:"",
       listening: false,
+      sending: false,
     };
     this.receiver = new SonicReceiver();
     this.handleListeningClick = this.handleListeningClick.bind(this);
@@ -27,8 +28,10 @@ class App extends Component {
 
   turnListenerOn() {
     this.setState({
-      listening: true
+      listening: true,
     })
+    if(this.state.sending === true)
+      this.exitSendMode();
     this.receiver.on('message', x => {
       console.log(`Received http:// ${x} `);
       window.open("http://" + x, "_self");
@@ -46,12 +49,10 @@ class App extends Component {
   }
 
   handleListeningClick() {
-    if(this.state.listening === false) {
+    if(this.state.listening === false)
       this.turnListenerOn();
-    }
-    else {
+    else
       this.turnListenerOff();
-    }
   }
 
   handleSubmitClick() {
@@ -67,12 +68,16 @@ class App extends Component {
     $('.hidden').removeClass('hidden').addClass('active');
     $('#sendButton').removeClass('active').addClass('hidden');
     this.turnListenerOff();
+    this.setState({ sending: true, });
   }
 
   exitSendMode() {
     $('.active').removeClass('active').addClass('hidden');
     $('#sendButton').removeClass('hidden').addClass('active');
-    this.setState({ input: '', });
+    this.setState({
+      input: '',
+      sending: false,
+    });
 
   }
 
@@ -213,13 +218,13 @@ class App extends Component {
                 <div id="sendSection" onClick={this.handleSendClick}>
                     <button className="active" id="sendButton">Send</button>
                     <input className="hidden"
-                           id="msg"
+                           id="urlInput"
                            type="text"
                            value={this.state.input}
                            onChange={this.handleInputChange}
-                           placeholder="Amplifi your link"/>
+                           placeholder="Enter your link"/>
                     <span className="hidden" id="submit" onClick={this.handleSubmitClick}>
-                      <i className="material-icons">send</i>
+                      <i className="material-icons">keyboard_arrow_right</i>
                     </span>
                 </div>
             </div>

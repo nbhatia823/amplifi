@@ -14,8 +14,6 @@
     src: url('./assets/fonts/nexa_light.otf');
 }
 
-.materials-icons { color: #0097f4 !important; }
-
 /********************************
 
     CSS RESET
@@ -230,6 +228,27 @@ p, input, button {
 
 #sendSection:hover {
     border: double 3px rgba(255, 255, 255, 0.5);
+}
+
+/********************************
+
+    SEND INPUT STYLING
+
+*********************************/
+
+#urlInput {
+    border-width: 0;
+    outline-width: 0;
+}
+
+#sendSection {
+  display: flex;
+  flex-direction: row;
+}
+
+#sendSection .material-icons {
+  font-size: 2.5em;
+  color: #0097f4;
 }
 
 /********************************
