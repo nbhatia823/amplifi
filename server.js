@@ -28,6 +28,7 @@ const shorten = (req, res, next) => {
       url: req.query.url
     }
   }).then(result => {
+    console.log(result);
     res.send(result);
   }).then(next);
 }
