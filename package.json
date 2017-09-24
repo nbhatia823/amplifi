@@ -35,7 +35,7 @@
     "react-particles-js": "^1.5.0",
     "request": "^2.82.0",
     "request-promise": "^4.2.2",
-    "sonicnet": "^0.2.6",
+    "sonicnet": "^0.2.7",
     "webpack": "^3.6.0"
   }
 }
