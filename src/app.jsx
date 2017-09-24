@@ -33,8 +33,8 @@ class App extends Component {
   }
 
   turnListenerOn() {
-    //if(this.state.sending === true)
-      //this.exitSendMode();
+    if(this.state.sending === true)
+      this.exitSendMode();
     this.setupListenerForListening();
     this.receiver.start();
   }
@@ -70,7 +70,7 @@ class App extends Component {
     $('#sendButton').removeClass('active').addClass('hidden');
     $('#cancel').removeClass('transparent');
     $('.inputHidden').removeClass('inputHidden').addClass('inputReceive');
-    //this.turnListenerOff();
+    this.turnListenerOff();
     this.setState({ sending: true, });
   }
 
