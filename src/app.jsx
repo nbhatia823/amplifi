@@ -90,7 +90,7 @@ class App extends Component {
     console.log('Sending message ', this.state.input );
     $.get('/url', {url: this.state.input}, data => {
       console.log('Received from api:', data);
-      const ssender = new SonicSender();
+      const ssender = new Sonic.Sender();
       ssender.send(data.slice(14));
     } );
   }
