@@ -1,0 +1,9 @@
+title: amplifi
+email:
+description: Zero config link sharing over soundwaves
+baseurl: "/amplifi" # the subpath of your site, e.g. /blog
+url: "https://nbhatia823.github.io/" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+theme: jekyll-theme-cayman
