@@ -45,7 +45,7 @@ class App extends Component {
     })
     this.receiver.on('message', x => {
       console.log(`Received http:// ${x}`);
-      window.open("https://is.gd/" + x, "_self");
+      window.open("https://is.gd/" + x, "_blank");
     });
     $('#listenSection').removeClass("off").addClass("on").children('#listening').html("");
   }
