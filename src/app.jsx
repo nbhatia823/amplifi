@@ -4,8 +4,8 @@ import Particles from 'react-particles-js';
 import Sonic from 'sonicnet';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       input:"",
       listening: false,
