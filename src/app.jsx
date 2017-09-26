@@ -4,22 +4,6 @@ import Particles from 'react-particles-js';
 import Sonic from 'sonicnet';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      input:"",
-      listening: false,
-      sending: false,
-    };
-    this.receiver = new Sonic.Receiver();
-    this.handleListeningClick = this.handleListeningClick.bind(this);
-    this.handleSubmitClick = this.handleSubmitClick.bind(this);
-    this.handleSendClick = this.handleSendClick.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.turnListenerOn = this.turnListenerOn.bind(this);
-    this.setupListenerForListening = this.setupListenerForListening.bind(this);
-  }
-
   componentDidMount() {
     this.receiver.start(this.setupListenerForListening);
     $(document).keydown((e) => {
@@ -32,14 +16,21 @@ class App extends Component {
     });
   }
 
-  turnListenerOn() {
+  state = {
+    input: '',
+    listening: false,
+    sending: false,
+  };
+  receiver = new Sonic.Receiver();
+
+  turnListenerOn = () => {
     if(this.state.sending === true)
       this.exitSendMode();
     this.setupListenerForListening();
     this.receiver.start();
   }
 
-  setupListenerForListening() {
+  setupListenerForListening = () => {
     this.setState({
       listening: true,
     })
@@ -50,7 +41,7 @@ class App extends Component {
     $('#listenSection').removeClass("off").addClass("on").children('#listening').html("");
   }
 
-  turnListenerOff() {
+  turnListenerOff = () => {
     this.receiver.stop();
     this.setState({
       listening: false
@@ -58,14 +49,14 @@ class App extends Component {
     $('#listenSection').removeClass("on").addClass("off").children('#listening').html("LISTEN");
   }
 
-  handleListeningClick() {
+  handleListeningClick = () => {
     if(this.state.listening === false)
       this.turnListenerOn();
     else
       this.turnListenerOff();
   }
 
-  handleSendClick() {
+  handleSendClick = () => {
     $('.hidden').removeClass('hidden').addClass('active');
     $('#sendButton').removeClass('active').addClass('hidden');
     $('#cancel').removeClass('transparent');
@@ -74,7 +65,7 @@ class App extends Component {
     this.setState({ sending: true, });
   }
 
-  exitSendMode() {
+  exitSendMode = () => {
     $('.active').removeClass('active').addClass('hidden');
     $('#sendButton').removeClass('hidden').addClass('active');
     $('#cancel').addClass('transparent');
@@ -86,7 +77,7 @@ class App extends Component {
     });
   }
 
-  handleSubmitClick() {
+  handleSubmitClick = () => {
     console.log('Sending message ', this.state.input );
     $.get('/url', {url: this.state.input}, data => {
       console.log('Received from api:', data);
@@ -95,12 +86,12 @@ class App extends Component {
     } );
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     this.setState({input: event.target.value});
     console.log('Input is:', this.state.input);
   }
 
-  render() {
+  render = () => {
     return (
         <div>
             <div id="background">
