@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "build": "webpack --watch --config webpack.config.js",
+    "start": "node server.js",
     "postinstall": "webpack --config webpack.config.js",
-    "start": "heroku local web"
+    "heroku": "heroku local web"
   },
   "repository": {
     "type": "git",
