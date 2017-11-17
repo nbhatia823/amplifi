@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 import Particles from 'react-particles-js';
 import Sonic from 'sonicnet';
 
@@ -250,4 +249,4 @@ class App extends Component {
   }
 }
 
-render(<App />, document.getElementById('main'));
+export default App;
