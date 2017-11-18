@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-module.exports = {
+const bundleConfig = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
@@ -9,8 +9,25 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
+      { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ }
     ]
   }
 };
+
+const swConfig = {
+  entry: './src/sw.js',
+  output: {
+    filename: 'sw.js',
+    path: path.resolve(__dirname, 'public')
+  },
+  module: {
+    loaders: [
+      { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ }
+    ]
+  }
+};
+
+module.exports = [
+  bundleConfig,
+  swConfig
+];
