@@ -34,7 +34,7 @@ const shorten = (req, res, next) => {
 }
 
 /******** ROUTES ********/
-app.get('/url', logreq, shorten);
+app.get('/shorten_url', logreq, shorten);
 
 /******** RUN SERVER ********/
 const PORT = process.env.PORT;

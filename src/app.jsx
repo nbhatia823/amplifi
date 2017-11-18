@@ -86,17 +86,18 @@ class App extends Component {
   }
 
   handleSubmitClick() {
-    console.log('Sending message ', this.state.input );
-    $.get('/url', {url: this.state.input}, data => {
+    console.log('Sending message:', this.state.input);
+    fetch(`/shorten_url/?url={this.state.input}`).then(
+      res => res.text()
+    ).then(res => {
       console.log('Received from api:', data);
       const ssender = new Sonic.Sender();
       ssender.send(data.slice(14));
-    } );
+    });
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) {
     this.setState({input: event.target.value});
-    console.log('Input is:', this.state.input);
   }
 
   render() {
