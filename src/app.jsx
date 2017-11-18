@@ -77,7 +77,7 @@ class App extends Component {
     });
   }
 
-  shortenUrl = url => fetch(`/shorten_url/?url={url}`).then(res => res.text());
+  shortenUrl = url => fetch(`/shorten_url/?url=${url}`).then(res => res.text());
 
   handleSubmitClick = () => {
     console.log('Sending message:', this.state.input);
@@ -85,6 +85,8 @@ class App extends Component {
       console.log('Received from api:', res);
       const ssender = new Sonic.Sender();
       ssender.send(res.slice(14));
+    }).catch(err => {
+      console.log('Failed to get short URL.');
     });
   }
 
