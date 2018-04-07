@@ -7,3 +7,5 @@ Simply have the event leader go to amplifi.tech and click "Send" to enter "Send 
 All people simply in "Listening" mode on amplifi.tech will automatically open up the link!
 
 Amplifi your link in seconds.
+
+![Alt text](/screenshot.png?raw=true "ScreenShot 1")
