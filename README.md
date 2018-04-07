@@ -8,4 +8,4 @@ All people simply in "Listening" mode on amplifi.tech will automatically open up
 
 Amplifi your link in seconds.
 
-![Alt text](/screenshot.png?raw=true "ScreenShot 1")
+![Alt text](/screenshot_web.png?raw=true "ScreenShot 1")
